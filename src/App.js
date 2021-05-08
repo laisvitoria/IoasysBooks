@@ -1,11 +1,13 @@
 import Routes from './routes';
-import './global.css'
+import { GlobalStyle } from "./global";
+import { AuthProvider } from './hooks/AuthContext'
 
 function App() {
   return (
-    <>
+    <AuthProvider>
+      <GlobalStyle/>
       <Routes/>
-    </>
+    </AuthProvider>
   );
 }
 

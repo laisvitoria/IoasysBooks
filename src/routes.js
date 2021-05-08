@@ -1,12 +1,40 @@
-import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import React, {useContext} from 'react';
+import { Router, Switch, Route, Redirect } from 'react-router-dom';
 
 import Login from './pages/Login';
 
-const Routes = () => (
-    <BrowserRouter>
-        <Route exact path="/" component={Login} />
-    </BrowserRouter>
-);
+import history from './history'
+import { Context } from './hooks/AuthContext'
 
-export default Routes;
+function CustomRoute({ isPrivate, isSoPublic, ...rest }) {
+    const { authenticated } = useContext(Context)
+    
+    if (isPrivate) {
+      let token
+      if(localStorage.length > 1){
+        token = localStorage.getItem('token')
+      }else{
+        token = sessionStorage.getItem('token')
+      }
+      if(!token){
+        return <Redirect to='/' />
+      }
+    }
+  
+    if (authenticated === true && isSoPublic) {
+      return <Redirect to='/' />
+    }
+  
+    return <Route {...rest} />
+  }
+  
+  const Routes = () => (
+    <Router history={history}>
+        <Switch>
+            <CustomRoute exact isSoPublic path='/' component={Login} />
+        </Switch>
+    </Router>
+  );
+  
+  export default Routes;
+  
