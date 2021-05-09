@@ -1,4 +1,4 @@
-import React, { Children } from 'react';
+import React from 'react';
 
 import {
     ContainerInput,
@@ -7,12 +7,12 @@ import {
     Input
 } from './styles';
 
-export default function InputForm({label, type, children}){
+export default function InputForm({label, type, children, ...rest}){
     return(
         <ContainerInput>
             <ContentInput>
                 <Label>{label}</Label>
-                <Input type={type}/>
+                <Input type={type} {...rest}/>
             </ContentInput>
             {children}
         </ContainerInput>

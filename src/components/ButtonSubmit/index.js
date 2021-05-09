@@ -1,17 +1,13 @@
-import React, {useContext} from 'react';
+import React from 'react';
 
 import {
     Button
 } from './styles';
 
-import {Context} from '../../hooks/AuthContext';
-
-export default function ButtonSubmit(){
-
-    const { handleLogin } = useContext(Context)
+export default function ButtonSubmit({onClick, ...rest}){
 
     return(
-        <Button onClick={handleLogin}>
+        <Button onClick={onClick} {...rest}>
             Entrar
         </Button>
     )
