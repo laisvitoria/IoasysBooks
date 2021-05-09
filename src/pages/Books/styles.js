@@ -1,11 +1,10 @@
-import Styles from 'styled-components';
+import Styles from 'styled-components'
 
-import background from '../../assets/BackgroundImage.png';
+import background from '../../assets/BackgroundImage-2.png';
 
-export const ContainerLogin = Styles.div`
+export const ContainerBooks = Styles.div`
     width: 100vw;
     height: 100vh;
-    display: flex;
     align-items: center;
     background-image: url(${background});
     background-repeat: no-repeat;
@@ -13,18 +12,16 @@ export const ContainerLogin = Styles.div`
     background-position: center;
 `;
 
-export const Content = Styles.div`
+export const HeaderContainer = Styles.header`
     width: 85%;
     margin: 0 auto;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
+    justify-content: space-between;
+    align-items: center;
 `;
 
 export const ContainerTitle = Styles.div`
     display: flex;
-    margin-bottom: 3rem;
 `;
 
 export const LogoIoasys = Styles.img`
@@ -37,5 +34,14 @@ export const Title = Styles.h2`
     font-weight: 300;
     font-size: 28px;
     line-height: 40px;
-    color: #FFFFFF;
+    color: #333333;
+`;
+
+export const ContentBooks = Styles.div`
+    width: 85%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
 `;

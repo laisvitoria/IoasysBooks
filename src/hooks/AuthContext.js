@@ -1,5 +1,6 @@
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext, useState } from "react";
 import api from '../services/api';
+import history from '../history'
 const Context = createContext();
 
 
@@ -17,9 +18,10 @@ function AuthProvider({children}){
             setAuthenticated(true)
             setUser(response.data)
             setToken(response.headers.authorization)
+            history.push("/home")
         })
         .catch (error => {
-          if(error.response.status === 401 || error.response.status === 500){
+          if(error.response?.status === 401 || error.response?.status === 500){
             setErroLogin(error.response.data.errors.message);
           }else{
             setErroLogin("Erro ao efetuar o login. Tente novamente!");
