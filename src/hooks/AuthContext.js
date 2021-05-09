@@ -7,24 +7,22 @@ function AuthProvider({children}){
     const [authenticated, setAuthenticated] = useState(false);
     const [loading, setLoading] = useState(true);
     const [erroLogin, setErroLogin] = useState('');
-    const [name, setName] = useState('');
+    const [user, setUser] = useState({});
+    const [token, setToken] = useState("");
 
     function handleLogin(values){
-        let loginSenha = JSON.stringify(values);
-        let emailPassword = JSON.parse(loginSenha);
 
-        api.post('/login', emailPassword)
+        api.post('/auth/sign-in', values)
         .then( function (response) {
             setAuthenticated(true)
-            setName(response.data.user.name)
-            window.location.href = "/";
+            setUser(response.data)
+            setToken(response.headers.authorization)
         })
         .catch (error => {
-          if(error.response.status === 404 || error.response.status === 409){
-            setErroLogin(error.response.data.error)
+          if(error.response.status === 401 || error.response.status === 500){
+            setErroLogin(error.response.data.errors.message);
           }else{
-            console.log(error);
-            setErroLogin("Erro ao efetuar o login. Tente novamente!")
+            setErroLogin("Erro ao efetuar o login. Tente novamente!");
           }
         })
         .finally(setLoading(false));
@@ -35,7 +33,7 @@ function AuthProvider({children}){
                 authenticated, setAuthenticated,
                 loading, setLoading,
                 erroLogin, setErroLogin, handleLogin,
-                name, setName,
+                user, setUser, token
             }}
         >
             {children}

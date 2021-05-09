@@ -26,7 +26,7 @@ export default function Login(){
 
     return(
         <Formik initialValues={{ email: "", password: "" }}
-            onSubmit={(values) => console.log(values)}//handleLogin(values.email, values.password)}
+            onSubmit={(values) => handleLogin(values)}
             validationSchema={validations}>
         {({ handleBlur, handleChange, handleSubmit, values}) =>(
             <ContainerLogin>
