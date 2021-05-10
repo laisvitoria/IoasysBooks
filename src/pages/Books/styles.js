@@ -60,7 +60,7 @@ export const UserName = Styles.p`
     margin-left: 0.3rem;
 `;
 
-export const ButtonLogOut = Styles.button`
+export const Button = Styles.button`
     border-radius: 100%;
     border: 1px solid rgb(51, 51, 51);
     padding: 0.5rem;
@@ -78,4 +78,22 @@ export const ContentBooks = Styles.div`
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
+`;
+
+export const PageBottom = Styles.footer`
+    display: flex;
+    width: 85%;
+    margin: 1rem auto;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+`;
+
+export const PageCounter = Styles.p`
+    font-family: Heebo;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 20px;
+    color: #333333;
 `;

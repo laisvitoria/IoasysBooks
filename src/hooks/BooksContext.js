@@ -6,6 +6,9 @@ const BooksContext = createContext();
 
 function BooksProvider({children}){
     const [loading, setLoading] = useState(false);
+    const [booksList, setBooksList] = useState([]);
+    const [totalPages, setTotalPages] = useState(0);
+    const [page, setPage] = useState(0);
 
     async function listBooks(token, page){
         setLoading(true);
@@ -15,11 +18,15 @@ function BooksProvider({children}){
               'Authorization': `Bearer ${token}` 
             },
             params: {
-                'page': page
+                'page': page,
+                'amount': 12
             }
         })
         .then( function (response) {
-            console.log(response)
+            console.log(response.data.data)
+            setBooksList(response.data.data)
+            setTotalPages(response.data.totalPages)
+            setPage(response.data.page)
         })
         .catch (error => {
           console.log(error.response)
@@ -46,7 +53,8 @@ function BooksProvider({children}){
         <BooksContext.Provider
             value={{
                 listBooks, loading,
-                bookDetails
+                bookDetails, booksList,
+                page, totalPages
             }}
         >
             {children}
