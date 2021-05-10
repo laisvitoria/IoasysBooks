@@ -11,7 +11,17 @@ import {
     Title
 } from './styles'
 
+import { AuthContext } from '../../hooks/AuthContext';
+import { BooksContext } from '../../hooks/BooksContext';
+
 export default function Books(){
+    const { listBooks, bookDetails } = useContext(BooksContext);
+    const { token } = useContext(AuthContext)
+
+    useEffect(() => {
+        listBooks(token, 1);
+    },[token])
+
     return(
         <ContainerBooks>
             <HeaderContainer>

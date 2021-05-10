@@ -14,7 +14,7 @@ import logo from '../../assets/LogoWhite.png'
 import InputForm from '../../components/Input';
 import ButtonSubmit from '../../components/ButtonSubmit';
 
-import { Context } from '../../hooks/AuthContext';
+import { AuthContext } from '../../hooks/AuthContext';
 
 export default function Login(){
     const validations = yup.object().shape({
@@ -22,7 +22,7 @@ export default function Login(){
         password: yup.string().required('Este campo é obrigatório!')
     })
 
-    const { handleLogin } = useContext(Context)
+    const { handleLogin } = useContext(AuthContext)
 
     return(
         <Formik initialValues={{ email: "", password: "" }}

@@ -1,7 +1,7 @@
 import React, { createContext, useState } from "react";
 import api from '../services/api';
 import history from '../history'
-const Context = createContext();
+const AuthContext = createContext();
 
 
 function AuthProvider({children}){
@@ -11,9 +11,8 @@ function AuthProvider({children}){
     const [user, setUser] = useState({});
     const [token, setToken] = useState("");
 
-    function handleLogin(values){
-
-        api.post('/auth/sign-in', values)
+    async function handleLogin(values){
+        await api.post('/auth/sign-in', values)
         .then( function (response) {
             setAuthenticated(true)
             setUser(response.data)
@@ -28,19 +27,36 @@ function AuthProvider({children}){
           }
         })
         .finally(setLoading(false));
-      }
+    }
+
+    async function refreshToken(token){
+      await api.post('/auth/refresh-token', {"refreshToken": token}, {
+        headers: {
+          'Authorization': `Bearer ${token}` 
+        }
+      })
+      .then( function (response) {
+          setToken(response)
+      })
+      .catch (error => {
+        console.log(error.response)
+      })
+      .finally(setLoading(false));
+    }
+
     return(
-        <Context.Provider
+        <AuthContext.Provider
             value={{
                 authenticated, setAuthenticated,
                 loading, setLoading,
                 erroLogin, setErroLogin, handleLogin,
-                user, setUser, token
+                user, setUser,
+                token, refreshToken
             }}
         >
             {children}
-        </Context.Provider>
+        </AuthContext.Provider>
     )
 }
 
-export { Context, AuthProvider}
+export { AuthContext, AuthProvider}

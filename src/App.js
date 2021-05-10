@@ -1,12 +1,15 @@
 import Routes from './routes';
 import { GlobalStyle } from "./global";
-import { AuthProvider } from './hooks/AuthContext'
+import { AuthProvider } from './hooks/AuthContext';
+import { BooksProvider } from './hooks/BooksContext';
 
 function App() {
   return (
     <AuthProvider>
-      <GlobalStyle/>
-      <Routes/>
+      <BooksProvider>
+        <GlobalStyle/>
+        <Routes/>
+      </BooksProvider>
     </AuthProvider>
   );
 }

@@ -5,10 +5,10 @@ import Login from './pages/Login';
 import Books from './pages/Books';
 
 import history from './history'
-import { Context } from './hooks/AuthContext'
+import { AuthContext } from './hooks/AuthContext'
 
 function CustomRoute({ isPrivate, isSoPublic, ...rest }) {
-    const { authenticated } = useContext(Context)
+    const { authenticated } = useContext(AuthContext)
     
     if (isPrivate && authenticated===false) {
         return <Redirect to='/' />
