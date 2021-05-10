@@ -23,6 +23,7 @@ import {
 
 import { AuthContext } from '../../hooks/AuthContext';
 import { BooksContext } from '../../hooks/BooksContext';
+import history from '../../history';
 
 export default function Books(){
     const { listBooks, bookDetails, booksList, page, totalPages} = useContext(BooksContext);
@@ -44,14 +45,15 @@ export default function Books(){
                         {user?.gender === 'F' ? 'Bem-vinda,' : 'Bem-vindo,'}
                         <UserName>{user?.name}!</UserName>
                     </WelcomeMessage>
-                    <Button>
+                    <Button onClick={()=>history.push('/')}>
                         <FiLogOut size={15} />
                     </Button>
                 </WelcomeContent>
             </HeaderContainer>
             <ContentBooks>
-                {booksList.map((book) => (
+                {booksList.map((book, index) => (
                     <Card
+                        key={index}
                         bookTitle={book.title}
                         imageUrl={book.imageUrl}
                         pageCount={book.pageCount}

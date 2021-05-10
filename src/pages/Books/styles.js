@@ -53,6 +53,10 @@ export const WelcomeMessage = Styles.p`
     line-height: 16px;
     text-align: right;
     color: #333333;
+
+    @media(max-width: 600px){
+        display: none;
+    }
 `;
 
 export const UserName = Styles.p`
@@ -78,6 +82,10 @@ export const ContentBooks = Styles.div`
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
+
+    @media(max-width: 1080px){
+        justify-content: space-evenly;
+    }
 `;
 
 export const PageBottom = Styles.footer`
@@ -87,6 +95,10 @@ export const PageBottom = Styles.footer`
     display: flex;
     justify-content: flex-end;
     align-items: center;
+
+    @media(max-width: 1080px){
+        justify-content: center;
+    }
 `;
 
 export const PageCounter = Styles.p`
